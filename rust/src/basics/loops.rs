@@ -1,10 +1,12 @@
 // Loop, do forever
+#[allow(dead_code)]
 fn infinite_loop() {
     loop {
-        println("To infinity...");
+        println!("To infinity...");
     }
 }
 
+#[allow(dead_code)]
 // Returning from loops
 fn return_loop() {
     let mut counter = 0;
@@ -20,15 +22,17 @@ fn return_loop() {
     println!("The result is {}", result);
 }
 
+#[allow(dead_code)]
 // While loop
 fn while_loop() {
-    let x = 0;
+    let mut x = 0;
     while x < 10 {
         println!("{}", x);
-        x++;
+        x+=1;
     }
 }
 
+#[allow(dead_code)]
 // For loop
 fn for_loop() {
     let a = [10, 20, 30, 40, 50];
