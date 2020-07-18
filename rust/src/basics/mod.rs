@@ -6,4 +6,5 @@ pub mod enums;
 pub mod functions;
 pub mod loops;
 pub mod structs;
+pub mod traits;
 pub mod tuples;
