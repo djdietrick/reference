@@ -73,6 +73,7 @@ fn some_function<T, U>(_t: &T, _u: &U) -> i32
 
 // Return items with traits
 // Cannot have paths that return different types (cannot return NewsArticle or Tweet)
+#[allow(dead_code)]
 fn returns_summarizable() -> impl Summary {
     Tweet {
         username: String::from("horse_ebooks"),

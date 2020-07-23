@@ -20,3 +20,15 @@ fn borrow(x: &i32) {
     println!("I'm just borrowing {}, you can use it again later", x);
 }
 
+#[allow(dead_code)]
+fn generic<T: PartialOrd + Copy>(list: &[T]) -> T {
+    let mut largest = list[0];
+
+    for &item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}

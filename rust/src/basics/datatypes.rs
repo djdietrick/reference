@@ -24,3 +24,25 @@ pub fn main() {
     let _absent_option: Option<i32> = None;
     let _present_option: Option<i32> = Some(5);
 }
+
+#[allow(dead_code)]
+fn slice() {
+    // Slice
+    let s = String::from("hello world");
+
+    // String slice &str
+    let _hello: &str = &s[0..5];
+    let _world = &s[6..11];
+    let _world2 = &s[6..];
+    let _whole = &s[..];
+
+    // Works with both &str and String
+    fn first_word(s: &str) -> &str {
+        s
+    }
+
+    // Can also slice arrays
+    let a = [1, 2, 3, 4, 5];
+
+    let _slice = &a[1..3];
+}
