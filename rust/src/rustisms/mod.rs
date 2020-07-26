@@ -3,3 +3,4 @@ pub mod documentation;
 pub mod iterators;
 pub mod lifetimes;
 pub mod smartptrs;
+pub mod threads;
