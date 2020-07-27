@@ -10,6 +10,24 @@ pub fn main() {
         println!("Greater!");
     }
 
+    let favorite_color: Option<&str> = None;
+    let is_tuesday = false;
+    let age: Result<u8, _> = "34".parse();
+
+    if let Some(color) = favorite_color {
+        println!("Using your favorite color, {}, as the background", color);
+    } else if is_tuesday {
+        println!("Tuesday is green day!");
+    } else if let Ok(age) = age {
+        if age > 30 {
+            println!("Using purple as the background color");
+        } else {
+            println!("Using orange as the background color");
+        }
+    } else {
+        println!("Using blue as the background color");
+    }
+
     // Conditional setting
     let condition = false;
     let _number = if condition { 5 } else { 6 };
@@ -45,6 +63,21 @@ pub fn main() {
             3 => print!("Three"),
             _ => print!("Other!"),
         }
+    }
+
+    // Or
+    let x = 1;
+    match x {
+        1 | 2 => println!("one or two"),
+        3 => println!("three"),
+        _ => println!("anything"),
+    }
+
+    // Range
+    let x = 5;
+    match x {
+        1..=5 => println!("one through five"),
+        _ => println!("something else"),
     }
 
     // If let
