@@ -100,3 +100,9 @@ fn move_value() {
 
     assert!(equal_to_x(y));
 }
+
+// Return closures from functions
+// Must return a box/ptr because size isn't known at compile time
+fn _returns_closure() -> Box<dyn Fn(i32) -> i32> {
+    Box::new(|x| x + 1)
+}

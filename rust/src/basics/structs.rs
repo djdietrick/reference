@@ -1,3 +1,5 @@
+use std::ops::Add;
+
 #[allow(dead_code)]
 struct User {
     username: String,
@@ -83,4 +85,61 @@ fn generics() {
 
     let _integer = Point { x: 5, y: 10 };
     let _float = Point { x: 1.0, y: 4.0 };
+}
+
+// Operator Overloading
+#[derive(Debug, PartialEq)]
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl Add for Point {
+    type Output = Point;
+
+    fn add(self, other: Point) -> Point {
+        Point {
+            x: self.x + other.x,
+            y: self.y + other.y,
+        }
+    }
+}
+
+// Default type parameter
+// trait Add<RHS=Self> {
+//     type Output;
+
+//     fn add(self, rhs: RHS) -> Self::Output;
+// }
+
+fn _overload_test() {
+    assert_eq!(
+        Point { x: 1, y: 0 } + Point { x: 2, y: 3 },
+        Point { x: 3, y: 3 }
+    );
+}
+
+struct Millimeters(u32);
+struct Meters(u32);
+
+// Using different types
+impl Add<Meters> for Millimeters {
+    type Output = Millimeters;
+
+    fn add(self, other: Meters) -> Millimeters {
+        Millimeters(self.0 + (other.0 * 1000))
+    }
+}
+
+// Type aliases
+#[allow(dead_code)]
+type Kilometers = i32;
+#[allow(dead_code)]
+type Thunk = Box<dyn Fn() + Send + 'static>;
+
+// Can also be used for results
+#[allow(dead_code)]
+type Result<T> = std::result::Result<T, std::io::Error>;
+fn _result_shorthand() -> Result<()> {
+    Ok(())
 }

@@ -32,3 +32,9 @@ fn generic<T: PartialOrd + Copy>(list: &[T]) -> T {
 
     largest
 }
+
+// Fnctions as arguments
+#[allow(dead_code)]
+fn do_twice(f: fn(i32) -> i32, arg: i32) -> i32 {
+    f(arg) + f(arg)
+}

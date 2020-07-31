@@ -84,3 +84,82 @@ fn returns_summarizable() -> impl Summary {
         retweet: false,
     }
 }
+
+// Associated types
+// Types to be used in definitions of the type but specified when implemented
+trait HasId {
+    type Id;
+
+    fn get_id(&self) -> Option<Self::Id>;
+}
+
+impl HasId for Tweet {
+    type Id = u32;
+    
+    fn get_id(&self) -> Option<Self::Id> {
+        Some(5)
+    }
+}
+
+// Disambiguation, when you have functions with the same name
+trait Animal {
+    fn baby_name() -> String;
+}
+
+struct Dog;
+
+impl Dog {
+    fn baby_name() -> String {
+        String::from("Spot")
+    }
+}
+
+impl Animal for Dog {
+    fn baby_name() -> String {
+        String::from("puppy")
+    }
+}
+
+fn _disambiguation() {
+    println!("A baby dog is called a {}", Dog::baby_name()); // Spot
+    
+    // Will not work because we can only call associated functions on implementations of the trait
+    //println!("A baby dog is called a {}", Animal::baby_name());
+
+    // Type as Trait>::function(receiver_if_method, next_arg, ...);
+    // Received would be the instance of dog if necessary
+    println!("A baby dog is called a {}", <Dog as Animal>::baby_name()); // puppy
+}
+
+// Super trait
+// Trait required for another trait's implementation
+use std::fmt;
+
+// OutlinePrint is dependent on Display
+trait OutlinePrint: fmt::Display {
+    fn outline_print(&self) {
+        let output = self.to_string();
+        let len = output.len();
+        println!("{}", "*".repeat(len + 4));
+        println!("*{}*", " ".repeat(len + 2));
+        println!("* {} *", output);
+        println!("*{}*", " ".repeat(len + 2));
+        println!("{}", "*".repeat(len + 4));
+    }
+}
+
+// Newtype pattern
+// Usually you can only implement a trait on a type when the crate owns either one
+// Can get around this with a Wrapper (tuple struct) and implement the trait on the type
+struct Wrapper(Vec<String>);
+
+impl fmt::Display for Wrapper {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "[{}]", self.0.join(", "))
+    }
+}
+
+fn _new_type() {
+    let w = Wrapper(vec![String::from("hello"), String::from("world")]);
+    println!("w = {}", w);
+}
