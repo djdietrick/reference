@@ -39,7 +39,7 @@ pub fn main() {
 }
 
 #[allow(dead_code)]
-fn multiple_types() {
+pub fn multiple_types() {
     // Using enums to store multiple types
     enum SpreadsheetCell {
         Int(i32),

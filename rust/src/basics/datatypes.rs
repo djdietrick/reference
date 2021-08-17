@@ -26,7 +26,7 @@ pub fn main() {
 }
 
 #[allow(dead_code)]
-fn slice() {
+pub fn slice() {
     // Slice
     let s = String::from("hello world");
 
